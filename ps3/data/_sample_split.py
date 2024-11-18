@@ -3,16 +3,6 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
-
-# Import practise dataframe
-
-dta = sns.load_dataset("iris")
-
-# Adding an id column that is == index
-dta["id"] = dta.index
-
-#print(hashlib.algorithms_available)
-
 # Function to return the intiger representation of a 16 hexadecimal hash 
 
 def return_hash_int(key):
@@ -23,8 +13,10 @@ def return_hash_int(key):
 
 # TODO: Write a function which creates a sample split based in some id_column and training_frac.
 # Optional: If the dtype of id_column is a string, we can use hashlib to get an integer representation.
-def create_sample_split(df, id_column, training_frac=0.8):
-    """Create sample split based on ID column.
+def create_sample_split(df, id_column, training_frac):
+    """Create sample split based on ID column. Creates a 'unique_identifier' column with a unique hashkey.
+    This column can be dropped following split. 'id_column' should be a column that is unique such as a
+    phone number or email adress.
 
     Parameters
     ----------
@@ -55,10 +47,24 @@ def create_sample_split(df, id_column, training_frac=0.8):
     test_df = df[df["unique_identifier"]>training_frac]
 
 
-    return train_df,test_df
+    return train_df, test_df
 
-test = create_sample_split(dta, "id")
 
+# Testing algorithm on 'iris' data set please unhash as needed
+
+'''
+# Import practise dataframe
+dta = sns.load_dataset("iris")
+
+# Adding an id column that is == index
+dta["id"] = dta.index
+
+test = create_sample_split(dta, "id", training_frac=0.8)
+
+print("Head of testing set: ")
+print(test[1].head())
+print("")
 print(f"length of training set is {len(test[0])}")
 print(f"length of testing set is {len(test[1])}")
-print(123/(123+27))
+print(f"Actual split train to test proportion: {  len(test[0])/   ( len(test[0])+  len(test[1]) )   }"   )
+'''
