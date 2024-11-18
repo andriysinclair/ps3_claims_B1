@@ -52,7 +52,7 @@ def create_sample_split(df, id_column, training_frac):
 
 # Testing algorithm on 'iris' data set please unhash as needed
 
-'''
+
 # Import practise dataframe
 dta = sns.load_dataset("iris")
 
@@ -67,4 +67,10 @@ print("")
 print(f"length of training set is {len(test[0])}")
 print(f"length of testing set is {len(test[1])}")
 print(f"Actual split train to test proportion: {  len(test[0])/   ( len(test[0])+  len(test[1]) )   }"   )
-'''
+
+print("")
+
+test_train_df = create_sample_split(dta, "id", training_frac=0.2)[0]
+test_test_df = create_sample_split(dta, "id", training_frac=0.2)[1]
+
+print(len(test_test_df) + len(test_test_df))
