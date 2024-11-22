@@ -46,8 +46,11 @@ def create_sample_split(df, id_column, training_frac):
     train_df = df[df["unique_identifier"]<=training_frac]
     test_df = df[df["unique_identifier"]>training_frac]
 
-
-    return train_df, test_df
+    # Create sample col based on unique identifier
+    df["sample"] = df["unique_identifier"].apply(
+        lambda x: 'train' if x <= training_frac else 'test'
+    )
+    return train_df, test_df, df
 
 
 # Testing algorithm on 'iris' data set please unhash as needed
@@ -74,3 +77,4 @@ test_train_df = create_sample_split(dta, "id", training_frac=0.2)[0]
 test_test_df = create_sample_split(dta, "id", training_frac=0.2)[1]
 
 print(len(test_test_df) + len(test_test_df))
+print(test_test_df.head())
