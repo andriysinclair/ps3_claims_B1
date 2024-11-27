@@ -38,7 +38,7 @@ def evaluate_predictions(y_true, y_pred, sample_weight=None):
         'Bias': bias,
         'Deviance': deviance,
         'MAE': mae,
-        'RMSE': rmse
+        'RMSE': rmse,
         'Gini': gini_coefficient
     }
 
